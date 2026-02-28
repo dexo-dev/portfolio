@@ -8,45 +8,43 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    :root {
-      --bg: #080808;
-      --fg: #f0f0f0;
-      --accent: #2ff9ff;
-      --muted: #555;
-    }
-
     html, body {
       height: 100%;
       overflow: hidden;
-      background: var(--bg);
-      color: var(--fg);
+      background: #07111e;
+      color: #e8f4f8;
       font-family: 'DM Sans', sans-serif;
     }
 
-    /* subtle noise grain */
+    /* Film grain noise */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
       pointer-events: none;
       z-index: 0;
     }
 
-    /* glow blob */
-    body::after {
-      content: '';
+    /* Radial glow behind title */
+    .glow-bg {
       position: fixed;
-      width: 500px;
-      height: 500px;
+      width: 700px;
+      height: 400px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(200,255,0,0.06) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(80,200,240,0.10) 0%, rgba(40,120,180,0.06) 40%, transparent 70%);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 0;
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      50%       { opacity: 0.7; transform: translate(-50%, -50%) scale(1.08); }
     }
 
     .container {
@@ -59,66 +57,55 @@
       align-items: center;
       text-align: center;
       padding: 2rem;
-      gap: 1.2rem;
-    }
-
-    .tag {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.2s;
+      gap: 1.4rem;
     }
 
     h1 {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: clamp(3.5rem, 12vw, 8rem);
+      font-size: clamp(3rem, 8vw, 6rem);
       line-height: 1;
-      letter-spacing: -0.03em;
-      color: var(--fg);
+      letter-spacing: -0.02em;
+      color: #d8f0f8;
+      text-shadow:
+        0 0 20px rgba(150, 220, 255, 0.9),
+        0 0 50px rgba(100, 190, 240, 0.6),
+        0 0 100px rgba(60, 150, 220, 0.35),
+        0 0 200px rgba(40, 120, 200, 0.2);
       opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.4s;
-    }
-
-    h1 span {
-      color: var(--accent);
+      animation: fadeIn 1.2s ease forwards 0.3s;
     }
 
     .subtitle {
-      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-size: clamp(0.8rem, 1.8vw, 0.95rem);
       font-weight: 300;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-      max-width: 320px;
-      line-height: 1.6;
+      color: rgba(180, 215, 235, 0.5);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.65s;
+      animation: fadeIn 1s ease forwards 0.9s;
     }
 
     .divider {
-      width: 32px;
+      width: 40px;
       height: 1px;
-      background: var(--accent);
+      background: linear-gradient(90deg, transparent, rgba(100,200,255,0.5), transparent);
       opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.55s;
+      animation: fadeIn 1s ease forwards 0.7s;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
+  <div class="glow-bg"></div>
   <div class="container">
-    <p class="tag">Independent Developer</p>
-    <h1>dexo<span>dev</span></h1>
+    <h1>DexoDev</h1>
     <div class="divider"></div>
-    <p class="subtitle">Making games and apps that make entertainment more fun and interactive..</p>
+    <p class="subtitle">Building clean, focused mobile experiences</p>
   </div>
 </body>
 </html>
