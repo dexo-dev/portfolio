@@ -188,8 +188,10 @@
     .scroll-hint {
       position: absolute;
       bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: fit-content;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -263,7 +265,7 @@
 
     .timeline-item {
       display: grid;
-      grid-template-columns: 32px 1fr;
+      grid-template-columns: 24px 1fr;
       gap: 16px;
       align-items: stretch;
     }
@@ -272,7 +274,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 34px;
+      padding-top: 0;
     }
 
     .timeline-dot {
@@ -281,6 +283,7 @@
       border: 1px solid var(--dim);
       transform: rotate(45deg);
       flex-shrink: 0;
+      margin-top: 30px;
     }
 
     .timeline-item:first-child .timeline-dot {
@@ -294,6 +297,7 @@
       width: 1px;
       background: linear-gradient(180deg, rgba(90,122,138,0.4), transparent);
       margin-top: 8px;
+      min-height: 16px;
     }
 
     .timeline-item:last-child .timeline-line { display: none; }
